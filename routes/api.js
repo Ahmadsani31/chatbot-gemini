@@ -87,15 +87,36 @@ router.post('/generate-from-image', upload.single('image'), async function (req,
 
 router.post('/generate-from-document', upload.single('document'), async function (req, res) {
 
-    const { prompt } = req.body
     const document = imageToGenerativePart(req.file.path, req.file.mimetype);
-    console.log(prompt);
     console.log('document', document);
     // return false
     try {
         console.log('success');
 
-        const result = await model.generateContent([prompt, document])
+        const result = await model.generateContent(['Analyze this document:', document])
+        const response = await result.response
+
+        res.json({ output: response.text() })
+        console.log('response', response.text());
+    } catch (error) {
+        console.log('error');
+        res.status(500).json({ error: error.message })
+    } finally {
+        fs.unlinkSync(req.file.path);
+    }
+
+
+})
+
+router.post('/generate-from-audio', upload.single('audio'), async function (req, res) {
+
+    const audio = imageToGenerativePart(req.file.path, req.file.mimetype);
+    console.log('audio', audio);
+    return false
+    try {
+        console.log('success');
+
+        const result = await model.generateContent(['Transcribe or analyze the following audio :', audio])
         const response = await result.response
 
         res.json({ output: response.text() })
