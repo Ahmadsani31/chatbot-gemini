@@ -87,8 +87,11 @@ router.post('/generate-from-image', upload.single('image'), async function (req,
 
 router.post('/generate-from-document', upload.single('document'), async function (req, res) {
 
-    const document = imageToGenerativePart(req.file.path, req.file.mimetype);
+    const document = imageToGenerativePart(req.file.path, "audio/mpeg");
+    console.log(req.file.mimetype);
+
     console.log('document', document);
+    return false
     // return false
     try {
         console.log('success');
@@ -111,6 +114,8 @@ router.post('/generate-from-document', upload.single('document'), async function
 router.post('/generate-from-audio', upload.single('audio'), async function (req, res) {
 
     const audio = imageToGenerativePart(req.file.path, req.file.mimetype);
+    console.log(req.file.mimetype);
+
     console.log('audio', audio);
     return false
     try {
