@@ -1,14 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { gemini_generate } = require('../utils/gemini_generate');
 const multer = require('multer');
 const fs = require('fs')
-
-// const { GoogleGenAI } = require("@google/genai");
-// const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: 'models/gemini-2.5-flash' });
 
 const upload = multer({ dest: 'uploads/' });
 
@@ -21,12 +15,13 @@ function imageToGenerativePart(imagePath, mimeType) {
     };
 }
 
+
 router.post('/generate-from-text', async function (req, res, next) {
 
     const { prompt } = req.body
 
     console.log('prompt', prompt);
-    return false
+    // return false
 
     if (prompt.length === 0) {
 
@@ -48,11 +43,10 @@ router.post('/generate-from-text', async function (req, res, next) {
 
     try {
 
-        const result = await model.generateContent(prompt)
-        const response = await result.response
+        const response = await gemini_generate(prompt)
 
-        res.json({ output: response.text() })
-        console.log('response', response.text());
+        res.json({ output: response })
+        console.log('response', response);
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -65,16 +59,16 @@ router.post('/generate-from-image', upload.single('image'), async function (req,
     const { prompt } = req.body
     const image = imageToGenerativePart(req.file.path, req.file.mimetype);
     console.log(prompt);
-    console.log('image', image);
-    return false
+    // console.log('image', image);
+    // return false
     try {
         console.log('success');
+        const response = await gemini_generate([prompt, image])
+        // const result = await model.generateContent([prompt, image])
+        // const response = await result.response
 
-        const result = await model.generateContent([prompt, image])
-        const response = await result.response
-
-        res.json({ output: response.text() })
-        console.log('response', response.text());
+        res.json({ output: response })
+        console.log('response', response);
     } catch (error) {
         console.log('error');
         res.status(500).json({ error: error.message })
@@ -87,20 +81,22 @@ router.post('/generate-from-image', upload.single('image'), async function (req,
 
 router.post('/generate-from-document', upload.single('document'), async function (req, res) {
 
-    const document = imageToGenerativePart(req.file.path, "audio/mpeg");
+    if (req.file.mimetype != 'application/pdf') {
+        res.status(500).json({ error: 'file harus format document / PDF' })
+        exit();
+    }
+
+    const document = imageToGenerativePart(req.file.path, req.file.mimetype);
     console.log(req.file.mimetype);
 
-    console.log('document', document);
-    return false
+    // console.log('document', document);
     // return false
     try {
         console.log('success');
+        const response = await gemini_generate([{ text: "Analyze this document" }, document])
 
-        const result = await model.generateContent(['Analyze this document:', document])
-        const response = await result.response
-
-        res.json({ output: response.text() })
-        console.log('response', response.text());
+        res.json({ output: response })
+        console.log('response', response);
     } catch (error) {
         console.log('error');
         res.status(500).json({ error: error.message })
@@ -113,19 +109,25 @@ router.post('/generate-from-document', upload.single('document'), async function
 
 router.post('/generate-from-audio', upload.single('audio'), async function (req, res) {
 
+    const audioFormat = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg']
+
+    if (!audioFormat.includes(req.file.mimetype)) {
+        res.status(500).json({ error: 'file harus format audio/mpeg, audio/mp3, audio/wav, audio/ogg' })
+        exit();
+    }
+
     const audio = imageToGenerativePart(req.file.path, req.file.mimetype);
     console.log(req.file.mimetype);
 
-    console.log('audio', audio);
-    return false
+    // console.log('audio', audio);
+    // return false
     try {
         console.log('success');
 
-        const result = await model.generateContent(['Transcribe or analyze the following audio :', audio])
-        const response = await result.response
+        const response = await gemini_generate([{ text: 'Transcribe or analyze the following audio' }, audio])
 
-        res.json({ output: response.text() })
-        console.log('response', response.text());
+        res.json({ output: response })
+        console.log('response', response);
     } catch (error) {
         console.log('error');
         res.status(500).json({ error: error.message })
