@@ -72,7 +72,7 @@ const ChatBox = () => {
         console.log(response.data);
         const botResponse: Message = {
           id: (Date.now() + 1).toString(),
-          text: response.data.message,
+          text: response.data.plaintext,
           sender: 'bot',
           timestamp: new Date(),
           isNew: true
