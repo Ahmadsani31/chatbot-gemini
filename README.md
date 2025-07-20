@@ -1,8 +1,10 @@
 # 🔮 CHAT BOT Gemini API Server
 
-## ✨ Tentang Proyek Ini
+## Preview
+![photobooth-preview](/public/preview.png)
 
-Aplikasi ini bertujuan untuk mempermudah developer dalam mengintegrasikan model generatif Google Gemini ke dalam aplikasi mereka. Daripada harus mengelola SDK dan logika pemrosesan file di sisi klien, server ini menangani semuanya dan menyediakan endpoint API yang siap pakai.
+## ✨ Tentang Proyek Ini
+Aplikasi ini dibuat dengan api gemini dari google. bertujuan untuk membuat chatbot sederhana, server ini menangani semuanya dan menyediakan endpoint API yang siap pakai.
 
 -----
 
@@ -12,8 +14,6 @@ Aplikasi ini bertujuan untuk mempermudah developer dalam mengintegrasikan model 
   - **🖼️ Analisis Gambar & Teks**: Kirim gambar beserta prompt teks untuk mendapatkan deskripsi, analisis, atau konten terkait.
   - **📄 Ekstraksi Dokumen & Generasi**: Unggah dokumen (seperti `.txt`, `.md`), server akan mengekstrak teksnya dan menggunakannya sebagai konteks untuk generasi konten.
   - **🎵 Transkripsi Audio & Generasi**: Unggah file audio, server akan mentranskripsikannya menjadi teks (membutuhkan integrasi Speech-to-Text) dan menggunakan hasilnya sebagai prompt untuk Gemini.
-  - **🔐 Keamanan**: Gunakan variabel lingkungan (`.env`) untuk menyimpan kunci API Anda dengan aman.
-  - **📦 Ringan & Cepat**: Dibangun dengan Express.js untuk performa optimal dan jejak minimal.
 
 -----
 
@@ -41,9 +41,8 @@ Ikuti langkah-langkah ini untuk menjalankan server secara lokal di mesin Anda.
 
 **Clone repositori ini:**
 
-    ```sh
     git clone https://github.com/Ahmadsani31/chatbot-gemini.git
-    ```
+    
 ### Config Backend
 1.  **Masuk ke direktori proyek:**
 
@@ -132,8 +131,8 @@ Menghasilkan konten berdasarkan input teks.
   - **Contoh Respon Sukses**:
     ```json
     {
-      "success": true,
-      "data": "Node.js adalah lingkungan runtime JavaScript sisi server yang dibangun di atas mesin JavaScript V8 Chrome..."
+      "param": true,
+      "plaintext": "Node.js adalah lingkungan runtime JavaScript sisi server yang dibangun di atas mesin JavaScript V8 Chrome..."
     }
     ```
 
@@ -155,8 +154,8 @@ Menganalisis gambar dan menghasilkan konten berdasarkan prompt tambahan.
   - **Contoh Respon Sukses**:
     ```json
     {
-      "success": true,
-      "data": "Di dalam gambar ini, terlihat ada beberapa jenis makanan: semangkuk salad, sepiring pasta, dan segelas jus jeruk."
+      "param": true,
+      "plaintext": "Di dalam gambar ini, terlihat ada beberapa jenis makanan: semangkuk salad, sepiring pasta, dan segelas jus jeruk."
     }
     ```
 
@@ -178,8 +177,8 @@ Mengekstrak teks dari file dokumen dan menggunakannya sebagai konteks.
   - **Contoh Respon Sukses**:
     ```json
     {
-      "success": true,
-      "data": "Berikut adalah 3 poin utama dari dokumen:\n1. Pentingnya inovasi teknologi.\n2. Dampak AI terhadap pasar kerja.\n3. Strategi adaptasi di era digital."
+      "param": true,
+      "plaintext": "Berikut adalah 3 poin utama dari dokumen:\n1. Pentingnya inovasi teknologi.\n2. Dampak AI terhadap pasar kerja.\n3. Strategi adaptasi di era digital."
     }
     ```
 
@@ -201,25 +200,13 @@ Mentranskripsi audio menjadi teks, lalu menggunakan teks tersebut untuk generasi
   - **Contoh Respon Sukses**:
     ```json
     {
-      "success": true,
-      "transcription": "Baik, rapat hari ini membahas tentang target kuartal depan...",
-      "data": "Ringkasan rapat: Diskusi berfokus pada penetapan target penjualan untuk kuartal berikutnya, dengan penekanan pada ekspansi pasar di wilayah timur."
+      "param": true,
+      "plaintext": "Ringkasan rapat: Diskusi berfokus pada penetapan target penjualan untuk kuartal berikutnya, dengan penekanan pada ekspansi pasar di wilayah timur."
     }
     ```
 
 -----
 
-## 🤝 Kontribusi
-
-Kontribusi Anda sangat kami hargai\! Jika Anda ingin berkontribusi, silakan:
-
-1.  **Fork** repositori ini.
-2.  Buat **Branch** baru (`git checkout -b fitur/FiturBaru`).
-3.  **Commit** perubahan Anda (`git commit -m 'Menambahkan FiturBaru'`).
-4.  **Push** ke Branch (`git push origin fitur/FiturBaru`).
-5.  Buka sebuah **Pull Request**.
-
------
 
 ## 📄 Lisensi
 

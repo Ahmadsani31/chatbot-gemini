@@ -44,10 +44,10 @@ router.post('/generate-from-text', async function (req, res, next) {
 
         const response = await gemini_generate(prompt)
 
-        res.json({ param: true, message: response })
+        res.json({ param: true, plaintext: response })
         console.log('response', response);
     } catch (error) {
-        res.status(500).json({ param: true, message: error.message })
+        res.status(500).json({ param: true, plaintext: error.message })
     }
 
 
@@ -66,11 +66,11 @@ router.post('/generate-from-image', upload.single('image'), async function (req,
         // const result = await model.generateContent([prompt, image])
         // const response = await result.response
 
-        res.json({ output: response })
+        res.json({ param: true, plaintext: response })
         console.log('response', response);
     } catch (error) {
         console.log('error');
-        res.status(500).json({ error: error.message })
+        res.status(500).json({ param: true, plaintext: error.message })
     } finally {
         fs.unlinkSync(req.file.path);
     }
@@ -94,11 +94,11 @@ router.post('/generate-from-document', upload.single('document'), async function
         console.log('success');
         const response = await gemini_generate([{ text: "Analyze this document" }, document])
 
-        res.json({ output: response })
+        res.json({ param: true, plaintext: response })
         console.log('response', response);
     } catch (error) {
         console.log('error');
-        res.status(500).json({ error: error.message })
+        res.status(500).json({ param: true, plaintext: error.message })
     } finally {
         fs.unlinkSync(req.file.path);
     }
@@ -125,11 +125,11 @@ router.post('/generate-from-audio', upload.single('audio'), async function (req,
 
         const response = await gemini_generate([{ text: 'Transcribe or analyze the following audio' }, audio])
 
-        res.json({ output: response })
+        res.json({ param: true, plaintext: response })
         console.log('response', response);
     } catch (error) {
         console.log('error');
-        res.status(500).json({ error: error.message })
+        res.status(500).json({ param: true, plaintext: error.message })
     } finally {
         fs.unlinkSync(req.file.path);
     }
