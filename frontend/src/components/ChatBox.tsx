@@ -13,7 +13,15 @@ interface Message {
 }
 
 const ChatBox = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: 'Halo! Selamat datang di chat box gemini. Apa yang bisa saya bantu?',
+      sender: 'bot',
+      timestamp: new Date(Date.now() - 60000),
+      isNew: false
+    },
+  ]);
 
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -77,18 +85,6 @@ const ChatBox = () => {
         setIsTyping(false)
       });
 
-
-    // Simulasi balasan bot
-    // setTimeout(() => {
-    //   const botResponse: Message = {
-    //     id: (Date.now() + 1).toString(),
-    //     text: `Terima kasih atas pesan Anda: "${inputValue}". Ini adalah balasan otomatis dari bot.`,
-    //     sender: 'bot',
-    //     timestamp: new Date(),
-    //     isNew: true
-    //   };
-    //   setMessages(prev => [...prev, botResponse]);
-    // }, 1000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
