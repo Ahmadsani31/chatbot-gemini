@@ -136,7 +136,7 @@ Menghasilkan konten berdasarkan input teks.
     }
     ```
 
-### 2\. Generate from Image
+### 2\. Analyze from Image
 
 Menganalisis gambar dan menghasilkan konten berdasarkan prompt tambahan.
 
@@ -159,7 +159,7 @@ Menganalisis gambar dan menghasilkan konten berdasarkan prompt tambahan.
     }
     ```
 
-### 3\. Generate from Document
+### 3\. Analyze from Document
 
 Mengekstrak teks dari file dokumen dan menggunakannya sebagai konteks.
 
@@ -182,7 +182,7 @@ Mengekstrak teks dari file dokumen dan menggunakannya sebagai konteks.
     }
     ```
 
-### 4\. Generate from Audio
+### 4\. Analyze from Audio
 
 Mentranskripsi audio menjadi teks, lalu menggunakan teks tersebut untuk generasi konten. *(Catatan: Fungsionalitas ini memerlukan implementasi tambahan untuk Speech-to-Text)*.
 
