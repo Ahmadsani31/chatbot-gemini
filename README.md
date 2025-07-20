@@ -19,6 +19,7 @@ Aplikasi ini bertujuan untuk mempermudah developer dalam mengintegrasikan model 
 
 ## 🛠️ Teknologi yang Digunakan
 
+  - [React.js + Vite](https://vite.dev/guide/)
   - [Node.js](https://nodejs.org/)
   - [Express.js](https://expressjs.com/)
   - [Google Generative AI SDK](https://github.com/google/generative-ai-js)
@@ -38,25 +39,25 @@ Ikuti langkah-langkah ini untuk menjalankan server secara lokal di mesin Anda.
 
 ### Instalasi
 
-1.  **Clone repositori ini:**
+**Clone repositori ini:**
 
     ```sh
     git clone https://github.com/Ahmadsani31/chatbot-gemini.git
     ```
-
-2.  **Masuk ke direktori proyek:**
+### Config Backend
+1.  **Masuk ke direktori proyek:**
 
     ```sh
-    cd chatbot-gemini
+    cd chatbot-gemini/backend
     ```
 
-3.  **Install semua dependensi:**
+2.  **Install semua dependensi:**
 
     ```sh
     npm install
     ```
 
-4.  **Konfigurasi Variabel Lingkungan:**
+3.  **Konfigurasi Variabel Lingkungan:**
 
       - Buat salinan dari file `.env.example` dan beri nama `.env`.
         ```sh
@@ -79,6 +80,30 @@ Ikuti langkah-langkah ini untuk menjalankan server secara lokal di mesin Anda.
     ```
 
     Server sekarang akan berjalan di `http://localhost:3000`.
+
+-----
+
+### Config Frontend
+1.  **Masuk ke direktori proyek:**
+
+    ```sh
+    cd chatbot-gemini/frontend
+    ```
+
+2.  **Install semua dependensi:**
+
+    ```sh
+    npm install
+    ```
+
+
+3.  **Jalankan :**
+
+    ```sh
+     npm run dev 
+    ```
+
+    Server sekarang akan berjalan di `http://localhost:8080`.
 
 -----
 
